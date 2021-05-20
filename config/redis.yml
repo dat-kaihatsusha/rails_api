@@ -1,0 +1,12 @@
+development: &default
+  host: rails_api_redis:6379
+
+test:
+  <<: *default
+
+# @todo staging用のホスト名に書き換える
+staging:
+
+# @todo 本番用のホスト名に書き換える
+production:
+  <<: *default

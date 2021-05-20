@@ -1,0 +1,79 @@
+version: "3"
+networks:
+  app-tier:
+    driver: bridge
+services:
+  rails_api_backend:
+    tty: true
+    stdin_open: true
+    container_name: rails_api_backend
+    environment:
+      OPENAPI: 1
+    build:
+      context: .
+      dockerfile: ./src/docker/backend/Dockerfile
+    volumes:
+      - ./:/app:delegated
+    working_dir: /app
+    ports:
+      - 23000:3000
+    command: >
+      sh -c "bundle config --global --delete without &&
+      bundle config --global --delete frozen &&
+      bundle config --global system true &&
+      bundle config --global --delete without &&
+      bundle config --global with 'development test' &&
+      bundle install &&
+      bundle exec rails db:create &&
+      bundle exec rails db:migrate &&
+      bundle exec pumactl start"
+    networks:
+      - app-tier
+  rails_api_mysql:
+    container_name: rails_api_mysql
+    image: 'mysql:5.7'
+    volumes:
+      - mysql:/var/lib/mysql:delegated
+    ports:
+      - 23306:3306
+    environment:
+      MYSQL_DATABASE: rails_api_development
+      MYSQL_DATABASE_FOR_TEST: rails_api_test
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    entrypoint:
+      sh -c "
+        echo 'mysql -uroot -e \"CREATE DATABASE IF NOT EXISTS $$MYSQL_DATABASE_FOR_TEST;\"' > /docker-entrypoint-initdb.d/init.sh;
+        /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      "
+    networks:
+      - app-tier
+  rails_api_redis:
+    container_name: rails_api_redis
+    image: redis:6.2.2
+    networks:
+      - app-tier
+  rails_api_redoc:
+    container_name: rails_api_redoc
+    image: redocly/redoc:latest
+    environment:
+      SPEC_URL: openapi.yaml
+    volumes:
+      - ./doc/openapi.yaml:/usr/share/nginx/html/openapi.yaml
+    ports:
+      - 23100:80
+    networks:
+      - app-tier
+  rails_api_phpmyadmin:
+    container_name: rails_api_phpmyadmin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 23200:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=rails_api_mysql
+      - PMA_USER=root
+    networks:
+      - app-tier
+volumes:
+  mysql:
