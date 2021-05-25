@@ -11,6 +11,15 @@ Rails.application.routes.draw do
     scope :dynamo do
       post '/sample_posts_by_ids', to: "dynamo#sample_posts_by_ids"
     end
+
+    #api account
+    put '/account', to: "accounts#create"
+    delete '/account/:id', to: "accounts#destroy"
+    get '/account', to: "accounts#index"
+    #api get token
+    put '/token', to: "authentications#token"
+    #api logout token
+    delete  "/logout",   to: "authentications#revoke_token"
   end
   
   # 認証ありAPIテスト用エンドポイント 

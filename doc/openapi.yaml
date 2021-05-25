@@ -17,3 +17,75 @@ paths:
               schema:
                 type: string
               example: ok
+        '401':
+          description: v1 ping
+          content:
+            text/html:
+              schema:
+                type: string
+              example: ''
+  "/api/token":
+    put:
+      summary: token
+      tags:
+      - Api::Authentication
+      responses:
+        '400':
+          description: v1 authentication
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: string
+              example:
+                errors: error get token failed
+        '422':
+          description: v1 authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: integer
+                email:
+                  type: string
+                password:
+                  type: integer
+            example:
+              account:
+                email: admin@gmail.com
+                password: 2
+              email: admin@gmail.com
+              password: 2
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                account:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+            example:
+              account:
+                email: admin@gmail.com
+                password: '2'
+  "/api/account":
+    put:
+      summary: create
+      tags:
+      - Api::Account
+      responses:
+        '400':
+          description: not version api

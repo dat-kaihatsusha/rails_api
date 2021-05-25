@@ -35,3 +35,5 @@
 # Additional
 /.env
 /src/yoor
+
+.idea
