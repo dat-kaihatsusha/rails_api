@@ -1,9 +1,9 @@
 class StillMigrateException < StandardError
   def response_status
-    :unprocessable_entity
+    :unauthorized
   end
   
   def message
-    "still migrate"
+    "Not Anauthorized"
   end
 end

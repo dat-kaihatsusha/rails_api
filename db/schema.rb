@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_105735) do
+ActiveRecord::Schema.define(version: 2021_05_25_103917) do
 
   create_table "accounts", charset: "utf8", force: :cascade do |t|
     t.string "email"
@@ -64,6 +64,11 @@ ActiveRecord::Schema.define(version: 2021_05_24_105735) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
+  end
+
+  create_table "plans", charset: "utf8", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "oauth_access_grants", "accounts", column: "resource_owner_id"

@@ -1,5 +1,5 @@
 class Api::AuthenticationsController < ApiController
-  skip_before_action :doorkeeper_authorize!, only: :token
+  skip_before_action :required_api_authorization!, only: :token
   # PUT /api/token
   def token
     account = Account.authenticate api_authentication_params
