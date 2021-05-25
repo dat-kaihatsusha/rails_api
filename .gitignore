@@ -36,4 +36,4 @@
 /.env
 /src/yoor
 
-.idea
+/.idea/*

@@ -24,6 +24,8 @@ paths:
               schema:
                 type: string
               example: ''
+        '400':
+          description: v1 ping
   "/api/token":
     put:
       summary: token
