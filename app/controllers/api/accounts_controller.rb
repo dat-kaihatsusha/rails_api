@@ -1,5 +1,5 @@
 class Api::AccountsController < ApiController
-  before_action :set_account, only: [:show, :update, :destroy]
+  # before_action :set_account, only: [:show, :update, :destroy]
 
   # GET /accounts
   def index
@@ -15,8 +15,8 @@ class Api::AccountsController < ApiController
 
   # POST /accounts
   def create
-    @account = Account.new(account_params)
-    @account.save
+    # @account = Account.new(account_params)
+    # @account.save
     render json: :ok
   end
 
@@ -31,7 +31,7 @@ class Api::AccountsController < ApiController
 
   # DELETE /accounts/1
   def destroy
-    @account.destroy
+    # @account.destroy
     render json: :ok
   end
 

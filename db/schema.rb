@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_103917) do
+ActiveRecord::Schema.define(version: 2021_05_26_035000) do
 
   create_table "accounts", charset: "utf8", force: :cascade do |t|
     t.string "email"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 2021_05_25_103917) do
   end
 
   create_table "diagnoses", charset: "utf8", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", charset: "utf8", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -64,6 +69,11 @@ ActiveRecord::Schema.define(version: 2021_05_25_103917) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
+  end
+
+  create_table "payments", charset: "utf8", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "plans", charset: "utf8", force: :cascade do |t|
