@@ -79,10 +79,16 @@ paths:
                       type: string
                     password:
                       type: string
+                email:
+                  type: string
+                password:
+                  type: string
             example:
               account:
                 email: admin@gmail.com
                 password: '2'
+              email: admin@gmail.com
+              password: '1'
   "/api/account":
     put:
       summary: create
@@ -91,3 +97,282 @@ paths:
       responses:
         '400':
           description: not version api
+        '200':
+          description: creates a new account
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '401':
+          description: header authorization failed
+    get:
+      summary: index
+      tags:
+      - Api::Account
+      responses:
+        '200':
+          description: renders a successful response
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+    delete:
+      summary: destroy
+      tags:
+      - Api::Account
+      responses:
+        '200':
+          description: delete success
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/messages":
+    get:
+      summary: index
+      tags:
+      - Api::Message
+      responses:
+        '200':
+          description: renders a successful response
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/plan":
+    get:
+      summary: index
+      tags:
+      - Api::Plan
+      responses:
+        '200':
+          description: renders a successful response
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: renders a successful response
+        '401':
+          description: renders a successful response
+    put:
+      summary: create
+      tags:
+      - Api::Plan
+      responses:
+        '200':
+          description: creates a new Api::Plan
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/plan/{id}":
+    delete:
+      summary: destroy
+      tags:
+      - Api::Plan
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 1
+      responses:
+        '200':
+          description: destroys the requested api_plan
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/plan/record":
+    put:
+      summary: record
+      tags:
+      - Api::Plan
+      responses:
+        '200':
+          description: write a record
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/recommend_plan":
+    get:
+      summary: recommend
+      tags:
+      - Api::Plan
+      responses:
+        '200':
+          description: get recommend_plan
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/music_list":
+    get:
+      summary: music_list
+      tags:
+      - Api::Plan
+      responses:
+        '200':
+          description: get list music
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/plan/dashboard":
+    get:
+      summary: dashboard
+      tags:
+      - Api::Plan
+      responses:
+        '200':
+          description: get dashboard
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/plan/love_list":
+    get:
+      summary: love_list
+      tags:
+      - Api::Plan
+      responses:
+        '200':
+          description: get list love
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/plan/result":
+    get:
+      summary: result
+      tags:
+      - Api::Plan
+      responses:
+        '200':
+          description: get result
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/payments":
+    get:
+      summary: index
+      tags:
+      - Api::Payment
+      responses:
+        '200':
+          description: renders a successful response
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/payment/register":
+    put:
+      summary: create
+      tags:
+      - Api::Payment
+      responses:
+        '200':
+          description: render successful response register
+          content:
+            application/json:
+              schema:
+                type: string
+              example: ok
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/logout":
+    delete:
+      summary: revoke_token
+      tags:
+      - Api::Authentication
+      responses:
+        '422':
+          description: renders successful response
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/plan/create_love":
+    put:
+      summary: create_love
+      tags:
+      - Api::Plan
+      responses:
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed
+  "/api/plan/create_time":
+    put:
+      summary: create_time
+      tags:
+      - Api::Plan
+      responses:
+        '400':
+          description: header version failed
+        '401':
+          description: header authorization failed

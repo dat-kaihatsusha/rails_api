@@ -21,32 +21,42 @@ Rails.application.routes.draw do
 
     #api account
     put '/account', to: "accounts#create"
-    delete '/account/:id', to: "accounts#destroy"
+    delete '/account', to: "accounts#destroy"
     get '/account', to: "accounts#index"
-    #api get token
+    #api get token/ put login
     put '/token', to: "authentications#token"
     #api logout token
     delete "/logout", to: "authentications#revoke_token"
     #api plan
-    get '/plan', to: "plans#index"
-    put '/plan', to: "plans#create"
-    delete '/plan/:id', to: "plans#destroy"
+    scope :plan do
+      get '/', to: "plans#index"
+      put '/', to: "plans#create"
+      delete '/:id', to: "plans#destroy"
+      #api record
+      put '/record', to: "plans#record"
+      #api love list
+      get '/love_list', to: "plans#love_list"
+      #api create love
+      match '/create_love', to: 'plans#create_love', via: [:put, :delete]
+      #api create time
+      match '/create_time', to: 'plans#create_time', via: [:put, :delete]
+      #api result list
+      get '/result', to: "plans#result"
+      #api dashboard
+      get '/dashboard', to: "plans#dashboard"
+    end
+    #api recommend_plan
     get '/recommend_plan', to: "plans#recommend"
     #api music list
     get '/music_list', to: "plans#music_list"
-    #api record
-    put '/record', to: "plans#record"
-    #api love list
-    get '/love_list', to: "plans#love_list"
-    # match 'photos', to: 'photos#show', via: [:get, :post]
-    #api create love
-    match '/create_love', to: 'plans#create_love', via: [:put, :delete]
-    #api create time
-    match '/create_time', to: 'plans#create_time', via: [:put, :delete]
-    #api result list
-    get '/result', to: "plans#result"
-    #api dashboard
-    get '/dashboard', to: "plans#dashboard"
+    #api payment
+    resources :payments, only: [:index]
+    scope :payment do
+      #api register payment
+      put '/register', to: "payments#create"
+    end
+    #api message list
+    resources :messages, only: [:index]
   end
 
   # 認証ありAPIテスト用エンドポイント 
